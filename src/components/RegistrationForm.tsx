@@ -81,10 +81,10 @@ const RegistrationForm = () => {
     const celularNumbers = data.celular.replace(/\D/g, "");
 
     const payload = {
-      Nome: data.nome,
-      Sobrenome: data.sobrenome,
-      Email: data.email,
-      Celular: celularNumbers,
+      nome: data.nome,
+      sobrenome: data.sobrenome,
+      email: data.email,
+      celular: celularNumbers,
     };
 
     try {
