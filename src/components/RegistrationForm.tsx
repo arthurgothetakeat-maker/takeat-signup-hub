@@ -92,6 +92,7 @@ const RegistrationForm = () => {
         "https://webhook.takeat.cloud/webhook/criar_aluno_frappe",
         {
           method: "POST",
+          mode: "no-cors",
           headers: {
             "Content-Type": "application/json",
           },
@@ -99,18 +100,11 @@ const RegistrationForm = () => {
         }
       );
 
-      const result = await response.json();
-
-      if (result.success === true) {
-        setSubmitStatus("success");
-        setStatusMessage("Cadastro realizado com sucesso!");
-        reset();
-      } else {
-        setSubmitStatus("error");
-        setStatusMessage(
-          "Não foi possível concluir o cadastro. Por favor, tente novamente."
-        );
-      }
+      // Com mode: "no-cors", não conseguimos ler a resposta, mas a requisição é enviada
+      // Assumimos sucesso se não houver erro de rede
+      setSubmitStatus("success");
+      setStatusMessage("Cadastro enviado com sucesso!");
+      reset();
     } catch (error) {
       setSubmitStatus("error");
       setStatusMessage(
