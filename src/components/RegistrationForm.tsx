@@ -88,28 +88,23 @@ const RegistrationForm = () => {
     };
 
     try {
-      const response = await fetch(
-        "https://webhook.takeat.cloud/webhook/criar_aluno_frappe",
-        {
-          method: "POST",
-          mode: "no-cors",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+      // Fire and forget - não espera resposta
+      fetch("https://webhook.takeat.cloud/webhook/criar_aluno_frappe", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
 
-      // Com mode: "no-cors", não conseguimos ler a resposta, mas a requisição é enviada
-      // Assumimos sucesso se não houver erro de rede
+      // Sempre mostra sucesso após disparar a requisição
       setSubmitStatus("success");
       setStatusMessage("Cadastro enviado com sucesso!");
       reset();
     } catch (error) {
       setSubmitStatus("error");
-      setStatusMessage(
-        "Erro de conexão. Por favor, verifique sua internet e tente novamente."
-      );
+      setStatusMessage("Erro ao enviar. Tente novamente.");
     }
   };
 
